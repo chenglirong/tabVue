@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+        }
+        .container{
+            width:400px;
+            height:300px;
+            border:1px solid #ccc;
+            margin:20px auto;
+        }
+        .list {
+            width:400px;
+            height:30px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+        }
+        .list li{
+            flex:1;
+            text-align: center;
+            line-height: 30px;
+        }
+        .list li.active{
+            background: lightseagreen;
+            color:#fff
+        }
+        .item{
+            width:400px;
+            height:270px;
+            overflow: hidden;
+        }
+        .item li{
+            height:270px;
+            text-align: center;
+            line-height: 250px;
+            font-size: 100px;
+            color: #fff;
+            background: #666;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <!-- <script src="mock.js"></script> -->
+    <script>
+
+     /*   var data=Mock.mock({
+            title:'@title',
+            contnet:'@word'
+        });
+        var arr=[]
+        for(var i=0;i<4;i++){
+            arr.push(data)
+        }
+        console.log(arr)*/
+        class Tab{
+            constructor(){
+                this.init();
+            }
+
+            //实例化
+            init(){
+                this.createWrap();
+                this.bindEvent();
+            }
+            createElement(ele){
+                return document.createElement(ele)
+            }
+            //动态创建比选项卡标题
+            createTitle(){
+                let ul=this.createElement('ul');
+                ul.className='list';
+                for(let i=0;i<4;i++){
+                    let uli=this.createElement('li');
+                    uli.innerHTML='item'+(i*1+1);
+                    uli.className='uli';
+                    ul.appendChild(uli);
+                }
+                return ul;
+            }
+            //动态创建选项卡内容
+            createContent(){
+                let ol=this.createElement('ol');
+                ol.className='item';
+                for(let i=0;i<4;i++){
+                    let oli=this.createElement('li');
+                    oli.innerHTML='item'+(i*1+1);
+                    oli.className='oli';
+                    ol.appendChild(oli);
+                }
+                return ol;
+            }
+            //动态创建选项卡容器
+            createWrap() {
+                let container = document.querySelector('.container');
+                let tlis = this.createTitle();
+                let clis = this.createContent();
+                container.append(tlis);
+                container.append(clis);
+            }
+            //绑定事件  切换内容     添加选中状态
+            bindEvent(){
+                let oli =document.querySelectorAll('.oli');
+                let uli =document.querySelectorAll('.uli');
+                for(let i=0;i<oli.length;i++){
+                    uli[i].addEventListener('click',()=>{
+                        for(let j=0;j<oli.length;j++){
+                            oli[j].style.display='none';
+                            uli[j].className='uli'
+                        }
+                        oli[i].style.display='block';
+                        uli[i].className='uli active'
+                    })
+                }
+            }
+
+
+        }
+        new Tab()
+
+
+
+    </script>
+</body>
+</html>
